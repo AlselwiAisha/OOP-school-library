@@ -11,6 +11,7 @@
 - [\[OOP-school-library\] ](#oop-school-library-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
+    - [Key Features ](#key-features-)
   - [💻 Getting Started ](#-getting-started-)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
@@ -40,7 +41,12 @@ OOP-school-library is a Ruby project to build a school library app. and implemen
 </details>
 
 <!-- Features -->
+### Key Features <a name="key-features"></a>
 
+- List all persons -Implement encapsulation and inheritance with Ruby
+- Basic command prompt user interface
+- Seperate classes & inheritance
+  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
