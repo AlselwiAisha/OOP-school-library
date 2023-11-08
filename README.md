@@ -74,8 +74,8 @@ Clone this repository to your desired folder:
 ```
 
 ### Usage
-
-
+To run the project, execute the following command:
+Create objects of classes & run on code editor
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 👥 Authors <a name="authors"></a>
