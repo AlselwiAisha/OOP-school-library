@@ -1,12 +1,11 @@
-require_relative 'person'
-require_relative 'capitalize_decorator'
-require_relative 'trimmer_decorator'
+require_relative 'app'
 
-person = Person.new(22, 'maximilianus')
-puts person.correct_name # maximilianus
+def main
+  app = App.new
+  puts '*' * 50
+  puts "|\tWelcome to the School Library App!\t\t |"
+  puts '*' * 50
+  app.run
+end
 
-capitalized_person = CapitalizeDecorator.new(person)
-puts capitalized_person.correct_name # Maximilianus
-
-capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
-puts capitalized_trimmed_person.correct_name # Maximilian
+main
