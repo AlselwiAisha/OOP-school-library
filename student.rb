@@ -6,6 +6,17 @@ class Student < Person
     @classroom = classroom
   end
 
+  def to_json(*args)
+    {
+      'type' => self.class,
+      'id' => @id,
+      'age' => @age,
+      'name' => @name,
+      'parent_permission' => @parent_permission,
+      'classroom' => @classroom
+    }.to_json(*args)
+  end
+
   def play_hooky
     '¯\(ツ)/¯'
   end

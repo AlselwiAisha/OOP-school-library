@@ -3,7 +3,7 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
-
+require_relative 'data_manger'
 class App
   def initialize
     @people = []
@@ -12,18 +12,19 @@ class App
   end
 
   def create_book
-    puts 'Title:'
+    print 'Title:'
     title = gets.chomp
-    puts 'Author:'
+    print 'Author:'
     author = gets.chomp
     @books << Book.new(title, author)
+    DataManger.save_book(@books)
     puts 'Book created successfully\n'
   end
 
   def create_student
-    puts 'Age:'
+    print 'Age:'
     age = gets.chomp
-    puts 'Name:'
+    print 'Name:'
     name = gets.chomp
     puts 'Has parent permission? [Y/N]'
     parent_permission = gets.chomp.downcase == 'y'
@@ -32,11 +33,11 @@ class App
   end
 
   def create_teacher
-    puts 'Age:'
+    print 'Age:'
     age = gets.chomp
-    puts 'Name:'
+    print 'Name:'
     name = gets.chomp
-    puts 'Specialization:'
+    print 'Specialization:'
     specialization = gets.chomp
     @people << Teacher.new(age, specialization, name: name)
     puts 'Person created successfully\n'
