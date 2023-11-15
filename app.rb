@@ -7,7 +7,7 @@ require_relative 'data_manger'
 require 'json'
 class App
   def initialize
-    @people = []
+    @people = DataManger.load_people
     @books = DataManger.load_books
     @rentals = []
   end
@@ -30,6 +30,7 @@ class App
     puts 'Has parent permission? [Y/N]'
     parent_permission = gets.chomp.downcase == 'y'
     @people << Student.new(age, name: name, parent_permission: parent_permission)
+    DataManger.save_people(@people)
     puts 'Person created successfully\n'
   end
 
@@ -41,6 +42,7 @@ class App
     print 'Specialization:'
     specialization = gets.chomp
     @people << Teacher.new(age, specialization, name: name)
+    DataManger.save_people(@people)
     puts 'Person created successfully\n'
   end
 

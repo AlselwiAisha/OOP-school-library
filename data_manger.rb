@@ -24,7 +24,7 @@ class DataManger
             classroom: person['classroom']
           )
         else
-          Teacher.new(person['age'], person['specialization'], id: person['id'], name: person['name'])
+          Teacher.new(person['age'], person['specialization'], name: person['name'])
         end
       end
     else
