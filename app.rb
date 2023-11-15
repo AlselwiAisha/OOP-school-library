@@ -19,7 +19,7 @@ class App
     author = gets.chomp
     @books << Book.new(title, author)
     DataManger.save_book(@books)
-    puts 'Book created successfully\n'
+    puts 'Book created successfully'
   end
 
   def create_student
@@ -31,7 +31,7 @@ class App
     parent_permission = gets.chomp.downcase == 'y'
     @people << Student.new(age, name: name, parent_permission: parent_permission)
     DataManger.save_people(@people)
-    puts 'Person created successfully\n'
+    puts 'Person created successfully'
   end
 
   def create_teacher
@@ -43,7 +43,7 @@ class App
     specialization = gets.chomp
     @people << Teacher.new(age, specialization, name: name)
     DataManger.save_people(@people)
-    puts 'Person created successfully\n'
+    puts 'Person created successfully'
   end
 
   def create_person
@@ -91,7 +91,9 @@ class App
     id = gets.chomp.to_i
     puts 'Rentals:'
     @rentals.each do |rental|
-      puts "Date: #{rental.date}, Book '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
+      if rental.person['id'] == id
+        puts "Date: #{rental.date}, Book '#{rental.book['title']}' by #{rental.book['author']}"
+      end
     end
   end
 

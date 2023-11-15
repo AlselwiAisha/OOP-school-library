@@ -12,6 +12,27 @@ class DataManger
     books.any? ? books : []
   end
 
+  def self.load_people
+    if File.exist?('./data/people.json')
+      people = JSON.parse(File.read('./data/people.json')).map do |person|
+        if person['type'].downcase == 'student'
+          Student.new(
+            person['age'],
+            id: person['id'],
+            name: person['name'],
+            parent_permission: person['parent_permission'],
+            classroom: person['classroom']
+          )
+        else
+          Teacher.new(person['age'], person['specialization'], id: person['id'], name: person['name'])
+        end
+      end
+    else
+      File.write('./data/people.json', JSON.dump([]))
+    end
+    people.any? ? people : []
+  end
+
   def self.load_rentals
     if File.exist?('./data/rentals.json')
       rentals = JSON.parse(File.read('./data/rentals.json')).map do |rental|
@@ -27,26 +48,6 @@ class DataManger
     rentals.any? ? rentals : []
   end
 
-  def self.load_people
-    if File.exist?('./data/people.json')
-      people = JSON.parse(File.read('./data/people.json')).map do |person|
-        if person['type'].downcase == 'student'
-          Student.new(
-            person['age'],
-            name: person['name'],
-            parent_permission: person['parent_permission'],
-            classroom: person['classroom']
-          )
-        else
-          Teacher.new(person['age'], person['specialization'], name: person['name'])
-        end
-      end
-    else
-      File.write('./data/people.json', JSON.dump([]))
-    end
-    people.any? ? people : []
-  end
-
   def self.save_book(books)
     if books.any?
       File.write('./data/books.json', JSON.dump(books))
@@ -56,7 +57,7 @@ class DataManger
   end
 
   def self.save_people(people)
-    if people
+    if people.any?
       File.write('./data/people.json', JSON.dump(people))
     else
       File.write('./data/people.json', JSON.dump([]))
@@ -64,7 +65,7 @@ class DataManger
   end
 
   def self.save_rentals(rentals)
-    if rentals
+    if rentals.any?
       File.write('./data/rentals.json', JSON.dump(rentals))
     else
       File.write('./data/rentals.json', JSON.dump([]))
