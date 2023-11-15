@@ -12,6 +12,27 @@ class DataManger
     books.any? ? books : []
   end
 
+  def self.load_people
+    if File.exist?('./data/people.json')
+      people = JSON.parse(File.read('./data/people.json')).map do |person|
+        if person['type'].downcase == 'student'
+          Student.new(
+            person['age'],
+            id: person['id'],
+            name: person['name'],
+            parent_permission: person['parent_permission'],
+            classroom: person['classroom']
+          )
+        else
+          Teacher.new(person['age'], person['specialization'], id: person['id'], name: person['name'])
+        end
+      end
+    else
+      File.write('./data/people.json', JSON.dump([]))
+    end
+    people.any? ? people : []
+  end
+
   def self.save_book(books)
     if books.any?
       File.write('./data/books.json', JSON.dump(books))

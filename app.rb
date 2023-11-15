@@ -4,10 +4,11 @@ require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
 require_relative 'data_manger'
+require 'json'
 class App
   def initialize
     @people = []
-    @books = DataManger.load_books
+    @books = []
     @rentals = []
   end
 

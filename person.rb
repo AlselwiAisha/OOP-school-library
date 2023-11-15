@@ -22,10 +22,18 @@ class Person < Nameable
     of_age? || @parent_permission
   end
 
-  def add_rental(date, book)
-    Rental.new(date, book, self)
+  def to_json(*args)
+    {
+      'id' => @id,
+      'name' => @name,
+      'age' => @age,
+      'parent_permission' => @parent_permission
+    }.to_json(*args)
   end
 
+  def add_rental(date, book)
+    Rental.new(date, book, self)
+  
   private
 
   def of_age?
