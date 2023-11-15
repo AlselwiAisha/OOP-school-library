@@ -7,7 +7,7 @@ require_relative 'data_manger'
 class App
   def initialize
     @people = []
-    @books = []
+    @books = DataManger.load_books
     @rentals = []
   end
 
