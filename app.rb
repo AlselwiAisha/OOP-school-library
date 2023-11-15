@@ -9,7 +9,7 @@ class App
   def initialize
     @people = DataManger.load_people
     @books = DataManger.load_books
-    @rentals = []
+    @rentals = DataManger.load_rentals
   end
 
   def create_book
@@ -74,6 +74,7 @@ class App
     puts 'Date:'
     date = gets.chomp
     @rentals << Rental.new(date, @books[book_index], @people[person_index])
+    DataManger.save_rentals(@rentals)
     puts 'Rental created successfully\n'
   end
 

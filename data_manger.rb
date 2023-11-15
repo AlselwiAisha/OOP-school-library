@@ -12,13 +12,27 @@ class DataManger
     books.any? ? books : []
   end
 
+  def self.load_rentals
+    if File.exist?('./data/rentals.json')
+      rentals = JSON.parse(File.read('./data/rentals.json')).map do |rental|
+        Rental.new(
+          rental['date'],
+          rental['book'],
+          rental['person']
+        )
+      end
+    else
+      File.write('./data/rentals.json', JSON.dump([]))
+    end
+    rentals.any? ? rentals : []
+  end
+
   def self.load_people
     if File.exist?('./data/people.json')
       people = JSON.parse(File.read('./data/people.json')).map do |person|
         if person['type'].downcase == 'student'
           Student.new(
             person['age'],
-            id: person['id'],
             name: person['name'],
             parent_permission: person['parent_permission'],
             classroom: person['classroom']
