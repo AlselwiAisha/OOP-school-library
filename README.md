@@ -84,6 +84,11 @@ Create objects of classes & run on code editor
 - GitHub: [Aisha Alselwi](https://github.com/AlselwiAisha/)
 - LinkedIn: [Aisha Alselwi](https://www.linkedin.com/in/aisha-alselwi/)
 
+- 👤 **Evans Kofi Nyamekye**
+- GitHub: [evansnyamekye](https://github.com/evansnyamekye)
+- Twitter: [@nyamekye2131](https://twitter.com/nyamekye2131)
+- LinkedIn: [Evans Kofi Nyamekye](https://www.linkedin.com/in/evans-kofi-nyamekye-1980a4117/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
