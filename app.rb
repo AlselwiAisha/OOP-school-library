@@ -8,7 +8,7 @@ require 'json'
 class App
   def initialize
     @people = []
-    @books = []
+    @books = DataManger.load_books
     @rentals = []
   end
 
