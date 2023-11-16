@@ -87,23 +87,22 @@ class App
     @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
   end
 
+  def print_rental_details(rental, id)
+    if (rental.person.is_a?(Teacher) || rental.person.is_a?(Student)) && rental.person.id == id
+      puts "Date: #{rental.date}, Book '#{rental.book.title}' by #{rental.book.author}"
+    elsif rental.person.is_a?(Hash) && %w[Teacher Student].include?(rental.person['type'])
+      if rental.person['id'] == id
+        puts "Date: #{rental.date}, Book '#{rental.book['title']}'   by #{rental.book['author']}"
+      end
+    end
+  end
+
   def list_rentals_for_person_id
     puts 'ID of person:'
-    @rentals = DataManger.load_rentals
     id = gets.chomp.to_i
     puts 'Rentals:'
     @rentals.each do |rental|
-      person_id =
-        if rental.person.is_a?(Teacher)
-          rental.person.id
-        elsif rental.person.is_a?(Student)
-          rental.person.id
-        elsif rental.person.is_a?(Hash) && rental.person['type'] == 'Teacher'
-          rental.person['id']
-        elsif rental.person.is_a?(Hash) && rental.person['type'] == 'Student'
-          rental.person['id']
-        end
-      puts "Date: #{rental.date}, Book '#{rental.book['title']}' by #{rental.book['author']}" if person_id == id
+      print_rental_details(rental, id)
     end
   end
 
