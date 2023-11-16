@@ -3,43 +3,48 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'data_manger'
+require 'pry'
 
 class App
   def initialize
-    @people = []
-    @books = []
-    @rentals = []
+    @books = DataManger.load_books
+    @people = DataManger.load_people
+    @rentals = DataManger.load_rentals
   end
 
   def create_book
-    puts 'Title:'
+    print 'Title:'
     title = gets.chomp
-    puts 'Author:'
+    print 'Author:'
     author = gets.chomp
     @books << Book.new(title, author)
-    puts 'Book created successfully\n'
+    DataManger.save_book(@books)
+    puts 'Book created successfully'
   end
 
   def create_student
-    puts 'Age:'
+    print 'Age:'
     age = gets.chomp
-    puts 'Name:'
+    print 'Name:'
     name = gets.chomp
     puts 'Has parent permission? [Y/N]'
     parent_permission = gets.chomp.downcase == 'y'
     @people << Student.new(age, name: name, parent_permission: parent_permission)
-    puts 'Person created successfully\n'
+    DataManger.save_people(@people)
+    puts 'Person created successfully'
   end
 
   def create_teacher
-    puts 'Age:'
+    print 'Age:'
     age = gets.chomp
-    puts 'Name:'
+    print 'Name:'
     name = gets.chomp
-    puts 'Specialization:'
+    print 'Specialization:'
     specialization = gets.chomp
     @people << Teacher.new(age, specialization, name: name)
-    puts 'Person created successfully\n'
+    DataManger.save_people(@people)
+    puts 'Person created successfully'
   end
 
   def create_person
@@ -70,6 +75,7 @@ class App
     puts 'Date:'
     date = gets.chomp
     @rentals << Rental.new(date, @books[book_index], @people[person_index])
+    DataManger.save_rentals(@rentals)
     puts 'Rental created successfully\n'
   end
 
@@ -81,12 +87,22 @@ class App
     @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
   end
 
+  def print_rental_details(rental, id)
+    if (rental.person.is_a?(Teacher) || rental.person.is_a?(Student)) && rental.person.id == id
+      puts "Date: #{rental.date}, Book '#{rental.book.title}' by #{rental.book.author}"
+    elsif rental.person.is_a?(Hash) && %w[Teacher Student].include?(rental.person['type'])
+      if rental.person['id'] == id
+        puts "Date: #{rental.date}, Book '#{rental.book['title']}'   by #{rental.book['author']}"
+      end
+    end
+  end
+
   def list_rentals_for_person_id
     puts 'ID of person:'
     id = gets.chomp.to_i
     puts 'Rentals:'
     @rentals.each do |rental|
-      puts "Date: #{rental.date}, Book '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
+      print_rental_details(rental, id)
     end
   end
 
