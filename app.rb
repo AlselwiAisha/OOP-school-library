@@ -5,6 +5,7 @@ require_relative 'book'
 require_relative 'rental'
 require_relative 'data_manger'
 require 'pry'
+require 'json'
 
 class App
   def initialize
